@@ -1,5 +1,5 @@
 import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
-import BusMap from './components/BusMap/BusMap';
+import { BusMap } from '@/components';
 
 export default function App() {
   return (
