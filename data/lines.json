@@ -1,0 +1,47 @@
+[
+    {
+        "id": "101",
+        "name": "Portal do Parque - Via PoupaTempo",
+        "color": "#f2ff00"
+    },
+    {
+        "id": "103",
+        "name": "Residencial Art Ville - Centro (Via São Conrado)",
+        "color": "#9e9e9e"
+    },
+    {
+        "id": "104",
+        "name": "Thereza Maria Barbiere - Centro (Via Rua Consolação)",
+        "color": "#ff9900"
+    },
+    {
+        "id": "105",
+        "name": "Conj. Hab. João Crevelaro - Centro (Via Santa Casa)",
+        "color": "#693a20"
+    },
+    {
+        "id": "106",
+        "name": "Alto do Colinas - Centro (Via Av. Euclides Miragaia)",
+        "color": "#000000"
+    },
+    {
+        "id": "107",
+        "name": "Res. Eurico Caetano - Centro (Via Pedro Marin Berbel)",
+        "color": "#ed3be4"
+    },
+    {
+        "id": "108",
+        "name": "Jandaia II - Centro (Via Jardim Ypê)",
+        "color": "#50f2ad"
+    },
+    {
+        "id": "109",
+        "name": "Toselar - Centro (Via Fórum)",
+        "color": "#11b807"
+    },
+    {
+        "id": "110",
+        "name": "Portal da Pérola - Centro (Via Antonio da Silva Nuves)",
+        "color": "#f2120a"
+    }
+]

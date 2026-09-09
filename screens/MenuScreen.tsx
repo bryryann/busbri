@@ -1,8 +1,14 @@
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from 'react-native';
 
 const MenuScreen = () => {
     return (
-        <Text>MenuScreen</Text>
+        <SafeAreaView
+            edges={['top']}
+            style={{ flex: 1 }}
+        >
+            <Text>MenuScreen</Text>
+        </SafeAreaView>
     );
 };
 
