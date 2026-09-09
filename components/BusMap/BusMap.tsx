@@ -8,23 +8,16 @@ import {
     type CameraRef,
 } from '@maplibre/maplibre-react-native';
 
-// ============================================================
-// CONFIGURAÇÃO DO MAPA — limites e centro inicial de Birigui
-// ============================================================
-
-// Bounding box que trava o pan/zoom: [west, south, east, north]
-// Se quiser liberar mais área, aumente esses valores (west/south
-// diminuem, east/north aumentam)
-const BIRIGUI_BOUNDS: [number, number, number, number] = [
-    -50.375, -21.325, -50.280, -21.250,
-];
-
-// Posição onde o mapa abre. Formato sempre [longitude, latitude]
-// (repare que é ao contrário do "lat, lon" que a gente costuma falar)
-const BIRIGUI_CENTER: [number, number] = [-50.34, -21.2886];
+import boundsData from '@/data/bounds.json';
+import { Bounds } from '@/types/bounds';
 
 // ============================================================
-// DADOS DAS ROTAS — é AQUI que você adiciona novas rotas
+// CONFIGURAÇÃO DO MAPA — limites e centro inicial da cidade
+// ============================================================
+const BOUNDS = boundsData as Bounds;
+
+// ============================================================
+// DADOS DAS ROTAS — novas rotas adicionadas aqui
 // ============================================================
 //
 // Cada rota é um "Feature" do tipo LineString: uma lista de pontos
@@ -108,7 +101,7 @@ const BusMap = () => {
         // Garante que o mapa abre centralizado em Birigui, mesmo
         // com maxBounds ativo no Camera (ver comentário do Camera)
         onDidFinishLoadingMap={() => {
-          cameraRef.current?.jumpTo({ center: BIRIGUI_CENTER, zoom: 13 });
+          cameraRef.current?.jumpTo({ center: BOUNDS.CITY_CENTER, zoom: 13 });
         }}
       >
         {/* Controla zoom/limites — não desenha nada visualmente */}
@@ -116,7 +109,7 @@ const BusMap = () => {
           ref={cameraRef}
           minZoom={12}
           maxZoom={18}
-          maxBounds={BIRIGUI_BOUNDS}
+          maxBounds={BOUNDS.CITY_BOUNDS}
         />
 
         {/* ---------- CAMADA DE ROTAS (linhas) ---------- */}
