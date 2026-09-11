@@ -4,10 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import RoutesScreen from "@/screens/RoutesScreen";
-import FavoritesScreen from "@/screens/FavoritesScreen";
+// import FavoritesScreen from "@/screens/FavoritesScreen";
 import HomeScreen from "@/screens/HomeScreen";
 import StationsScreen from "@/screens/StationsScreen";
-import MenuScreen from "@/screens/MenuScreen";
+// import MenuScreen from "@/screens/MenuScreen";
 
 import colors from "@/globals/colors";
 
@@ -39,6 +39,8 @@ const TabsNavigator = () => {
                 }}
             />
 
+            {/* 
+            =============== WIP ===================
             <Tab.Screen 
                 name="Favorites"
                 component={FavoritesScreen}
@@ -53,6 +55,7 @@ const TabsNavigator = () => {
                     ),
                 }}
             />
+            */}
 
             <Tab.Screen 
                 name="Home"
@@ -84,6 +87,8 @@ const TabsNavigator = () => {
                 }}
             />
 
+            {/* 
+            =============== WIP ===================
             <Tab.Screen 
                 name="Menu"
                 component={MenuScreen}
@@ -98,6 +103,7 @@ const TabsNavigator = () => {
                     ),
                 }}
             />
+            */}
         </Tab.Navigator>
     )
 }
