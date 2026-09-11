@@ -1,4 +1,5 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { Line } from '@/types/lines';
@@ -9,8 +10,15 @@ interface LineBriefItemProps {
 }
 
 const LineBriefItem = ({ lineDetails }: LineBriefItemProps) => {
+    const navigation = useNavigation();
+
     return (
-        <Pressable style={styles.container} >
+        <Pressable 
+            style={styles.container}
+            onPress={() => 
+                navigation.navigate('RouteDetails')
+            }
+        >
             <View style={styles.lineBox} >
                 <View style={styles.lineContent}>
                     <Ionicons
