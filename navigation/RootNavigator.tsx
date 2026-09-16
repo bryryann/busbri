@@ -3,8 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import TabsNavigator from "./TabsNavigator";
 import RouteDetailsScreen from "@/screens/RouteDetailsScreen";
+import { RootStackParamList } from "@/types/rootNavigator";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
     return (
@@ -24,7 +25,7 @@ const RootNavigator = () => {
 
             />
         </Stack.Navigator>
-    )
+    );
 };
 
 export default RootNavigator;

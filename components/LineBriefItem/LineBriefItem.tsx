@@ -1,22 +1,24 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
+import { RootStackParamList } from '@/types/rootNavigator';
 import { Line } from '@/types/lines';
-import colors from '@/globals/colors';
 
 interface LineBriefItemProps {
     lineDetails: Line;
 }
 
 const LineBriefItem = ({ lineDetails }: LineBriefItemProps) => {
-    const navigation = useNavigation();
+    const navigation = 
+        useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     return (
         <Pressable 
             style={styles.container}
             onPress={() => 
-                navigation.navigate('RouteDetails')
+                navigation.navigate('RouteDetails', { lineDetails })
             }
         >
             <View style={styles.lineBox} >
