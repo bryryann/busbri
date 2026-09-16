@@ -10,6 +10,7 @@ import {
 
 import boundsData from '@/data/bounds.json';
 import { Bounds } from '@/types/bounds';
+import { MarkerGeoJSON, RouteGeoJSON } from '@/types/geojson';
 
 // ============================================================
 // CONFIGURAÇÃO DO MAPA — limites e centro inicial da cidade
@@ -28,7 +29,7 @@ const BOUNDS = boundsData as Bounds;
 // Dica: para pegar coordenadas reais, use o site geojson.io — dá
 // pra desenhar a linha visualmente no mapa e copiar o JSON gerado.
 
-const rotas = {
+const rotas: RouteGeoJSON = {
     type: 'FeatureCollection' as const,
     features: [
         {
@@ -36,7 +37,7 @@ const rotas = {
         // "properties" pode guardar qualquer metadado da rota
         // (nome, cor, status etc.) — útil se depois você quiser
         // estilizar cada rota de forma diferente
-        properties: { nome: 'Rota exemplo' },
+        properties: { name: 'Rota exemplo' },
         geometry: {
             type: 'LineString' as const,
             coordinates: [
@@ -53,7 +54,7 @@ const rotas = {
         //
         // {
         //   type: 'Feature' as const,
-        //   properties: { nome: 'Rota do centro ao bairro X' },
+        //   properties: { name: 'Rota do centro ao bairro X' },
         //   geometry: {
         //     type: 'LineString' as const,
         //     coordinates: [
@@ -73,17 +74,17 @@ const rotas = {
 // "properties.tipo" é livre — você usa esse valor depois se quiser
 // dar cores/ícones diferentes por tipo de marco.
 
-const marcos = {
+const marcos: MarkerGeoJSON = {
     type: 'FeatureCollection' as const,
     features: [
         {
         type: 'Feature' as const,
-        properties: { tipo: 'inicio' },
+        properties: { type: 'start' },
         geometry: { type: 'Point' as const, coordinates: [-50.352, -21.298] },
         },
         {
         type: 'Feature' as const,
-        properties: { tipo: 'fim' },
+        properties: { type: 'end' },
         geometry: { type: 'Point' as const, coordinates: [-50.322, -21.280] },
         },
         // Novo marco/parada? Copie um dos blocos acima e ajuste
@@ -91,7 +92,7 @@ const marcos = {
     ],
 };
 
-const BusMap = () => {
+const CityMap = () => {
     const cameraRef = useRef<CameraRef>(null);
 
     return (
@@ -153,7 +154,7 @@ const BusMap = () => {
     );
 }
 
-export default BusMap;
+export default CityMap;
 
 const styles = StyleSheet.create({
   container: { flex: 1 },

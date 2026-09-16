@@ -1,5 +1,5 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { BusMap } from '@/components';
+import CityMap from '@/components/CityMap';
 
 const StationsScreen = () => {
     return (
@@ -7,7 +7,7 @@ const StationsScreen = () => {
             edges={['top']}
             style={{ flex: 1 }}
         >
-            <BusMap />
+            <CityMap />
         </SafeAreaView>
     );
 };
