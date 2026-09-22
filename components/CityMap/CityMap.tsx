@@ -37,7 +37,7 @@ const rotas: RouteGeoJSON = {
         // "properties" pode guardar qualquer metadado da rota
         // (nome, cor, status etc.) — útil se depois você quiser
         // estilizar cada rota de forma diferente
-        properties: { name: 'Rota exemplo' },
+        properties: { id: "000", name: 'Rota exemplo', color: '-' },
         geometry: {
             type: 'LineString' as const,
             coordinates: [
@@ -79,12 +79,12 @@ const marcos: MarkerGeoJSON = {
     features: [
         {
         type: 'Feature' as const,
-        properties: { type: 'start' },
+        properties: { id: "ex-001", name: 'start', order: 1, },
         geometry: { type: 'Point' as const, coordinates: [-50.352, -21.298] },
         },
         {
         type: 'Feature' as const,
-        properties: { type: 'end' },
+        properties: { id: "ex-002", name: 'end', order: 2, },
         geometry: { type: 'Point' as const, coordinates: [-50.322, -21.280] },
         },
         // Novo marco/parada? Copie um dos blocos acima e ajuste

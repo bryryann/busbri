@@ -1,5 +1,7 @@
 export type RouteProperties = {
+    id: string;
     name: string;
+    color: string; // unsafe
 };
 
 export type RouteGeoJSON = {
@@ -15,7 +17,9 @@ export type RouteGeoJSON = {
 };
 
 export type MarkerProperties = {
-    type: string;
+    id: string;
+    name: string;
+    order: number;
 };
 
 export type MarkerGeoJSON = {
