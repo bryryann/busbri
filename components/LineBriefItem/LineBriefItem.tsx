@@ -8,18 +8,28 @@ import { Line } from '@/types/lines';
 
 interface LineBriefItemProps {
     lineDetails: Line;
+    onAccess?: (line: Line) => void;
 }
 
-const LineBriefItem = ({ lineDetails }: LineBriefItemProps) => {
+const LineBriefItem = ({ 
+    lineDetails,
+    onAccess
+}: LineBriefItemProps) => {
     const navigation = 
         useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+    const handlePress = () => {
+        onAccess?.(lineDetails);
+
+        navigation.navigate('RouteDetails', {
+            lineDetails
+        });
+    }
 
     return (
         <Pressable 
             style={styles.container}
-            onPress={() => 
-                navigation.navigate('RouteDetails', { lineDetails })
-            }
+            onPress={handlePress}
         >
             <View style={styles.lineBox} >
                 <View style={styles.lineContent}>
