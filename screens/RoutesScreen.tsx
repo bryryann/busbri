@@ -14,6 +14,7 @@ import LineBriefItem from '@/components/LineBriefItem';
 import colors from '@/globals/colors';
 import { Line } from '@/types/lines';
 import { fuzzySearch } from '@/utils/searchEngine';
+import { Ionicons } from '@expo/vector-icons';
 
 const LINES = lines as Line[];
 const MAX_RECENTS = 5;
@@ -84,15 +85,24 @@ const RoutesScreen = () => {
             style={styles.container}
         >
             <View style={styles.header}>
-                <TextInput
-                    style={styles.searchBar}
-                    placeholder="Pesquise uma linha"
-                    placeholderTextColor="#888"
-                    value={search}
-                    onChangeText={setSearch}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                />
+                <View style={styles.searchContainer}>
+                    <Ionicons
+                        name='search'
+                        size={20}
+                        color='#888'
+                        style={styles.searchIcon}
+                    />
+
+                    <TextInput
+                        style={styles.searchBar}
+                        placeholder="Pesquise uma linha"
+                        placeholderTextColor="#888"
+                        value={search}
+                        onChangeText={setSearch}
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                    />
+                </View>
             </View>
 
             <SectionList
@@ -133,24 +143,33 @@ const styles = StyleSheet.create({
 
     header: {
         height: 108,
-
         backgroundColor: colors.primary,
-
         justifyContent: 'flex-end',
         alignItems: 'center',
-
         paddingBottom: 9,
     },
 
+    searchContainer: {
+        position: 'relative',
+        justifyContent: 'center',
+        width: '100%',
+        paddingHorizontal: 16,
+    },
+
+    searchIcon: {
+        position: 'absolute',
+        left: 28,
+        zIndex: 1,
+    },
+
     searchBar: {
-        width: '90%',
-        height: 33,
-
-        backgroundColor: 'white',
-
-        paddingHorizontal: 10,
-
-        fontSize: 14,
+        width: '100%',
+        height: 44,
+        backgroundColor: '#f2f2f2',
+        borderRadius: 10,
+        paddingLeft: 40,
+        paddingRight: 12,
+        color: '#000',
     },
 
     listContent: {
@@ -160,7 +179,6 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 18,
         fontWeight: '600',
-
         marginTop: 11,
         marginBottom: 7,
         marginHorizontal: 29,
