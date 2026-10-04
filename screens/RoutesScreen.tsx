@@ -4,9 +4,10 @@ import { View, Text, TextInput, FlatList, StyleSheet } from 'react-native';
 
 import lines from '@/data/lines.json';
 
-import colors from '@/globals/colors';
 import LineBriefItem from '@/components/LineBriefItem';
+import colors from '@/globals/colors';
 import { Line } from '@/types/lines';
+import { fuzzySearch } from '@/utils/searchEngine';
 
 const LINES = lines as Line[];
 
@@ -17,11 +18,9 @@ const RoutesScreen = () => {
     const handleSearch = (t: string) => {
         setSearch(t);
 
-        const filtered = LINES.filter(line => (
-            line.name.toLowerCase().includes(t.toLowerCase())
-        ));
+        const results = fuzzySearch(LINES, t)
 
-        setFilteredData(filtered);
+        setFilteredData(results);
     }
 
     return (
@@ -32,7 +31,7 @@ const RoutesScreen = () => {
             <View style={styles.header} >
                 <TextInput
                     style={styles.searchBar}
-                    placeholder='Encontre sua linha...'
+                    placeholder='Pesquise uma linha'
                     value={search}
                     onChangeText={handleSearch}
                 />
@@ -70,6 +69,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderWidth: 1,
         paddingHorizontal: 10,
+        marginTop: 15,
         borderRadius: 5,
     },
 });
