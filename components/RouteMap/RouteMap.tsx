@@ -25,6 +25,7 @@ const RouteMap = ({ lineDetails }: RouteMapProps) => {
                     id: lineDetails.id,
                     name: lineDetails.name,
                     color: lineDetails.color,
+                    offset: 0,
                 },
                 geometry: {
                     type: 'LineString',
@@ -74,7 +75,7 @@ const RouteMap = ({ lineDetails }: RouteMapProps) => {
                     id={`route-line-${lineDetails.id}`}
                     paint={{
                         'line-color': lineDetails.color,
-                        'line-width': 4,
+                        'line-width': 2,
                     }}
                     layout={{
                         'line-cap': 'round',
