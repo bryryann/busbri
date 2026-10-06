@@ -1,7 +1,8 @@
 export type RouteProperties = {
     id: string;
     name: string;
-    color: string; // unsafe
+    color: string;
+    offset: number;
 };
 
 export type RouteGeoJSON = {

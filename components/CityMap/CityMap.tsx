@@ -34,17 +34,18 @@ const LINES = linesData as Line[];
 
 const rotas: RouteGeoJSON = {
     type: 'FeatureCollection' as const,
-    features: LINES.map((line) => ({
-      type: 'Feature',
-      properties: {
-        id: line.id,
-        name: line.name,
-        color: line.color
-      },
-      geometry: {
-        type: 'LineString',
-        coordinates: line.route.coordinates
-      }
+    features: LINES.map((line, index) => ({
+        type: 'Feature',
+        properties: {
+            id: line.id,
+            name: line.name,
+            color: line.color,
+            offset: (index % 3 - 1) * 2,
+        },
+        geometry: {
+            type: 'LineString',
+            coordinates: line.route.coordinates
+        }
     }))
 };
 
@@ -98,7 +99,8 @@ const CityMap = () => {
             id="rotasLinha"
             paint={{
               'line-color': ['get', 'color'],
-              'line-width': 3,
+              'line-width': 2,
+              'line-offset': ['get', 'offset'],
             }}
             layout={{
               'line-cap': 'round',
