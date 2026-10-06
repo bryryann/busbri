@@ -9,13 +9,16 @@ import {
 } from '@maplibre/maplibre-react-native';
 
 import boundsData from '@/data/bounds.json';
+import linesData from '@/data/lines.json';
 import { Bounds } from '@/types/bounds';
 import { MarkerGeoJSON, RouteGeoJSON } from '@/types/geojson';
+import { Line } from '@/types/lines';
 
 // ============================================================
 // CONFIGURAÇÃO DO MAPA — limites e centro inicial da cidade
 // ============================================================
 const BOUNDS = boundsData as Bounds;
+const LINES = linesData as Line[];
 
 // ============================================================
 // DADOS DAS ROTAS — novas rotas adicionadas aqui
@@ -31,66 +34,39 @@ const BOUNDS = boundsData as Bounds;
 
 const rotas: RouteGeoJSON = {
     type: 'FeatureCollection' as const,
-    features: [
-        {
-        type: 'Feature' as const,
-        // "properties" pode guardar qualquer metadado da rota
-        // (nome, cor, status etc.) — útil se depois você quiser
-        // estilizar cada rota de forma diferente
-        properties: { id: "000", name: 'Rota exemplo', color: '-' },
-        geometry: {
-            type: 'LineString' as const,
-            coordinates: [
-            [-50.352, -21.298],
-            [-50.345, -21.292],
-            [-50.338, -21.288],
-            [-50.330, -21.283],
-            [-50.322, -21.280],
-            ],
-        },
-        },
-        // Para adicionar uma segunda rota, copie o bloco acima e cole
-        // aqui embaixo, com properties/coordinates diferentes. Exemplo:
-        //
-        // {
-        //   type: 'Feature' as const,
-        //   properties: { name: 'Rota do centro ao bairro X' },
-        //   geometry: {
-        //     type: 'LineString' as const,
-        //     coordinates: [
-        //       [-50.340, -21.290],
-        //       [-50.335, -21.285],
-        //     ],
-        //   },
-        // },
-    ],
+    features: LINES.map((line) => ({
+      type: 'Feature',
+      properties: {
+        id: line.id,
+        name: line.name,
+        color: line.color
+      },
+      geometry: {
+        type: 'LineString',
+        coordinates: line.route.coordinates
+      }
+    }))
 };
 
-// ============================================================
-// MARCOS (início/fim/paradas) — pontos sobre as rotas
-// ============================================================
-//
-// Cada marco é um Feature do tipo Point (um único par de coordenadas).
-// "properties.tipo" é livre — você usa esse valor depois se quiser
-// dar cores/ícones diferentes por tipo de marco.
-
+const startPoint = LINES[0].stops[0];
 const marcos: MarkerGeoJSON = {
-    type: 'FeatureCollection' as const,
+    type: 'FeatureCollection',
     features: [
-        {
-        type: 'Feature' as const,
-        properties: { id: "ex-001", name: 'start', order: 1, },
-        geometry: { type: 'Point' as const, coordinates: [-50.352, -21.298] },
+      {
+        type: 'Feature',
+        properties: {
+          id: startPoint.id,
+          name: startPoint.name,
+          order: startPoint.order
         },
-        {
-        type: 'Feature' as const,
-        properties: { id: "ex-002", name: 'end', order: 2, },
-        geometry: { type: 'Point' as const, coordinates: [-50.322, -21.280] },
+        geometry: {
+          type: 'Point',
+          coordinates: startPoint.coordinates
         },
-        // Novo marco/parada? Copie um dos blocos acima e ajuste
-        // "tipo" e "coordinates".
+      },
     ],
 };
+
 
 const CityMap = () => {
     const cameraRef = useRef<CameraRef>(null);
@@ -121,8 +97,8 @@ const CityMap = () => {
             type="line"
             id="rotasLinha"
             paint={{
-              'line-color': '#e11d48', // cor da linha
-              'line-width': 4,         // espessura em pixels
+              'line-color': ['get', 'color'],
+              'line-width': 3,
             }}
             layout={{
               'line-cap': 'round',
@@ -138,17 +114,12 @@ const CityMap = () => {
             id="marcosPontos"
             paint={{
               'circle-radius': 6,
-              'circle-color': '#e11d48',
+              'circle-color': '#cccccc',
               'circle-stroke-width': 2,
               'circle-stroke-color': '#ffffff',
             }}
           />
         </GeoJSONSource>
-
-        {/* Quer uma camada nova (ex: áreas/polígonos, outro tipo de
-            rota com cor diferente)? Adicione outro par
-            <GeoJSONSource> + <Layer> aqui, com um "id" único para
-            cada um. */}
       </Map>
 
     );
