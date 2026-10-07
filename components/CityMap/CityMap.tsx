@@ -16,10 +16,14 @@ import { Line } from '@/types/lines';
 const BOUNDS = boundsData as Bounds;
 
 interface CityMapProps {
-  linesData: Line[]
-}
+  linesData: Line[];
+  selectedLineId?: string | null;
+};
 
-const CityMap = ({ linesData }: CityMapProps) => {
+const CityMap = ({ 
+  linesData,
+  selectedLineId,
+}: CityMapProps) => {
   const cameraRef = useRef<CameraRef>(null);
 
   const rotas: RouteGeoJSON = {
@@ -85,8 +89,25 @@ const CityMap = ({ linesData }: CityMapProps) => {
           id="rotasLinha"
           paint={{
             'line-color': ['get', 'color'],
-            'line-opacity': 0.7,
-            'line-width': 2,
+
+            'line-opacity': selectedLineId
+              ? [
+                'case',
+                ['==', ['get', 'id'], selectedLineId],
+                1,
+                0.15
+              ]
+              : 0.7,
+
+            'line-width': selectedLineId
+              ? [
+                'case',
+                ['==', ['get', 'id'], selectedLineId],
+                3,
+                2,
+              ]
+              : 2,
+
             'line-offset': ['get', 'offset'],
           }}
           layout={{
