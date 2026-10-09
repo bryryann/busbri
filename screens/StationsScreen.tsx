@@ -1,20 +1,32 @@
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Line } from '@/types/lines';
 import LINES from '@/data/lines.json';
 import CityMap from '@/components/CityMap';
 import colors from '@/globals/colors';
+import { RootStackParamList } from '@/types/rootNavigator';
 
 const linesData = LINES as Line[]
 
 const StationsScreen = () => {
     const [selectedLineId, setSelectedLineId] = useState<string | null>(null);
+    
+    const navigation =
+        useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     const selectedLine = linesData.find(
         (line) => line.id === selectedLineId
     );
+
+    const handleStationPress = (lineDetails: Line) => {
+        navigation.navigate('RouteDetails', {
+            lineDetails
+        });
+    };
 
     const handleLineSelection = (lineId: string | null) => {
         setSelectedLineId(lineId);
@@ -36,7 +48,7 @@ const StationsScreen = () => {
                                 pressed && styles.routeTitlePressed,
                             ]}
                             onPress={() => {
-                                // TODO: navigate to route information screen
+                                handleStationPress(selectedLine)
                             }}
                         >
                             <Text
@@ -96,6 +108,7 @@ export default StationsScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#fff',
     },
 
     stationMenuContainer: {
