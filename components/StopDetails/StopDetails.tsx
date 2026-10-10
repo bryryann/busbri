@@ -31,6 +31,10 @@ const StopDetails = ({ stop }: StopDetailsProps) => {
                             Tempo estimado indisponível
                         </Text>
                 </View>
+
+                <Text style={styles.stopRoutes}>
+                    {stop.routes?.join(', ') ?? ''}
+                </Text>
             </View>
         </View>
 
@@ -72,6 +76,13 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         color: '#333',
         marginBottom: 2,
+    },
+
+    stopRoutes: {
+        fontSize: 12,
+        fontWeight: '800',
+        color: '#777',
+        marginTop: 4,
     },
 
     walkingTime: {

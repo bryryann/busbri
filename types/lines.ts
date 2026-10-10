@@ -7,6 +7,7 @@ export type Stop = {
     name: string;
     order: number;
     coordinates: Coordinate;
+    routes: number[];
 };
 
 export interface Line {

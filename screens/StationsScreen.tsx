@@ -10,7 +10,7 @@ import CityMap from '@/components/CityMap';
 import colors from '@/globals/colors';
 import { RootStackParamList } from '@/types/rootNavigator';
 
-const linesData = LINES as Line[]
+const linesData = LINES as unknown as Line[]
 
 const StationsScreen = () => {
     const [selectedLineId, setSelectedLineId] = useState<string | null>(null);
