@@ -1,4 +1,6 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
 import { Stop } from "@/types/lines";
 
 interface StopDetailsProps {
@@ -9,9 +11,7 @@ const StopDetails = ({ stop }: StopDetailsProps) => {
     return (
         <View style={styles.stopItem}>
             <Image
-                source={{
-                    uri: 'https://placehold.co/120x120/DEDEDE/111111?text=Foto+da+Estacao',
-                }}
+                source={require('@/assets/images/station-placeholder.png')}
                 style={styles.stopImage}
                 resizeMode='cover'
             />
@@ -21,9 +21,16 @@ const StopDetails = ({ stop }: StopDetailsProps) => {
                     {stop.name}
                 </Text>
 
-                <Text style={styles.stopDetail}>
-                    Parada {stop.name}
-                </Text>
+                <View style={styles.walkingTime}>
+                        <Ionicons
+                            name="walk"
+                            size={16}
+                            color="#555"
+                        />
+                        <Text style={styles.stopDetail}>
+                            Tempo estimado indisponível
+                        </Text>
+                </View>
             </View>
         </View>
 
@@ -66,4 +73,10 @@ const styles = StyleSheet.create({
         color: '#333',
         marginBottom: 2,
     },
+
+    walkingTime: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 4,
+    }
 })
