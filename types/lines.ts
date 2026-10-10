@@ -2,7 +2,7 @@ type HexColor = `#${string}`;
 
 type Coordinate = [number, number];
 
-type Stop = {
+export type Stop = {
     id: string;
     name: string;
     order: number;
