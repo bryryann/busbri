@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
 
     routeList: {
         paddingHorizontal: 8,
-        paddingVertical: 8,
+        paddingVertical: 12,
         gap: 2,
     },
 
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 10,
         paddingVertical: 8,
-        marginHorizontal: 2,
+        marginHorizontal: 4,
         borderRadius: 6,
         borderWidth: 1,
         borderColor: 'transparent',
