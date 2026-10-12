@@ -83,7 +83,7 @@
         },
         "stops": [
             {
-                "id": "101-01",
+                "id": "1",
                 "name": "Terminal Rodoviário",
                 "order": 1,
                 "coordinates": [ -50.347458, -21.2925751 ],
@@ -169,7 +169,7 @@
         },
         "stops": [
             {
-                "id": "103-01",
+                "id": "1",
                 "name": "Terminal Rodoviário",
                 "order": 1,
                 "coordinates": [ -50.347458, -21.2925751 ],
@@ -251,7 +251,7 @@
         },
         "stops": [
             {
-                "id": "104-01",
+                "id": "1",
                 "name": "Terminal Rodoviário",
                 "order": 1,
                 "coordinates": [ -50.347458, -21.2925751 ],
@@ -351,7 +351,7 @@
         },
         "stops": [
             {
-                "id": "105-01",
+                "id": "1",
                 "name": "Terminal Rodoviário",
                 "order": 1,
                 "coordinates": [ -50.347458, -21.2925751 ],
@@ -491,7 +491,7 @@
         },
         "stops": [
             {
-                "id": "106-01",
+                "id": "1",
                 "name": "Terminal Rodoviário",
                 "order": 1,
                 "coordinates": [ -50.347458, -21.2925751 ],
@@ -628,7 +628,7 @@
         },
         "stops": [
             {
-                "id": "107-01",
+                "id": "1",
                 "name": "Terminal Rodoviário",
                 "order": 1,
                 "coordinates": [ -50.347458, -21.2925751 ],
@@ -795,7 +795,7 @@
         },
         "stops": [
             {
-                "id": "108-01",
+                "id": "1",
                 "name": "Terminal Rodoviário",
                 "order": 1,
                 "coordinates": [ -50.347458, -21.2925751 ],
@@ -925,7 +925,7 @@
         },
         "stops": [
             {
-                "id": "109-01",
+                "id": "1",
                 "name": "Terminal Rodoviário",
                 "order": 1,
                 "coordinates": [ -50.347458, -21.2925751 ],
@@ -1095,7 +1095,7 @@
         },
         "stops": [
             {
-                "id": "110-01",
+                "id": "1",
                 "name": "Terminal Rodoviário",
                 "order": 1,
                 "coordinates": [ -50.347458, -21.2925751 ],

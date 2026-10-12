@@ -39,7 +39,11 @@ const StopDetails = ({ stop }: StopDetailsProps) => {
 
             </View>
 
-            <FavoriteButton type='stop' id={stop.id} />
+            <FavoriteButton 
+                type='stop' 
+                id={stop.id} 
+                variant='heart'
+            />
         </View>
 
     );

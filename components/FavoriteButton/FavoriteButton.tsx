@@ -17,11 +17,13 @@ import {
 interface FavoriteButtonProps {
     type: FavoriteType;
     id: string;
+    variant?: 'star' | 'heart';
 }
 
 const FavoriteButton = ({
     type,
     id,
+    variant = 'star',
 }: FavoriteButtonProps) => {
     const dispatch = useAppDispatch();
 
@@ -47,6 +49,20 @@ const FavoriteButton = ({
         }
     };
 
+    const iconName =
+        variant === 'heart'
+            ? isFavorite
+                ? 'heart'
+                : 'heart-outline'
+            : isFavorite
+                ? 'star'
+                : 'star-outline';
+
+    const filledIconColor =
+        variant === 'heart'
+            ? '#ff0707'
+            : '#FFC107'
+
     return (
         <Pressable
             onPress={handlePress}
@@ -61,14 +77,13 @@ const FavoriteButton = ({
             accessibilityState={{ selected: isFavorite }}
             style={({ pressed }) => [
                 styles.button,
-                isFavorite && styles.activeButton,
                 pressed && styles.pressed,
             ]}
         >
             <Ionicons
-                name={isFavorite ? 'star' : 'star-outline'}
+                name={iconName}
                 size={22}
-                color={isFavorite ? '#F5A623' : '#777'}
+                color={isFavorite ? filledIconColor : '#777'}
             />
         </Pressable>
     );
@@ -83,16 +98,10 @@ const styles = StyleSheet.create({
         flexShrink: 0,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 20,
-        backgroundColor: 'transparent',
-    },
-
-    activeButton: {
-        backgroundColor: '#FFF6E5',
     },
 
     pressed: {
-        opacity: 0.65,
+        opacity: 0.6,
         transform: [{ scale: 0.92 }],
     },
 });
