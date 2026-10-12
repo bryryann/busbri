@@ -10,6 +10,8 @@ export type FavoriteStop = {
 
 export type Favorite = FavoriteLine | FavoriteStop;
 
+export type FavoriteType = 'line' | 'stop'
+
 // FavoritesState guarda apenas o id das linhas/paradas favoritados.
 // Melhor performance e evita possível duplicação.
 export interface FavoritesState {

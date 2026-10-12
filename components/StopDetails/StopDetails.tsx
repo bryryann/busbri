@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { Stop } from "@/types/lines";
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 
 interface StopDetailsProps {
     stop: Stop
@@ -35,7 +36,10 @@ const StopDetails = ({ stop }: StopDetailsProps) => {
                 <Text style={styles.stopRoutes}>
                     {stop.routes?.join(', ') ?? ''}
                 </Text>
+
             </View>
+
+            <FavoriteButton type='stop' id={stop.id} />
         </View>
 
     );
@@ -60,7 +64,9 @@ const styles = StyleSheet.create({
 
     stopInfo: {
         flex: 1,
+        minWidth: 0,
         marginLeft: 15,
+        marginRight: 8,
         justifyContent: 'center',
     },
 

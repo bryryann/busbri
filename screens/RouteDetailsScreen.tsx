@@ -6,6 +6,7 @@ import { RootStackParamList } from '@/types/rootNavigator';
 import colors from '@/globals/colors';
 import RouteMap from '@/components/RouteMap/RouteMap';
 import StopDetails from '@/components/StopDetails';
+import FavoriteButton from '@/components/FavoriteButton/FavoriteButton';
 
 type Props = NativeStackScreenProps<
     RootStackParamList,
@@ -27,9 +28,16 @@ const RouteDetailsScreen = ({ route }: Props) => {
             <RouteMap lineDetails={lineDetails} />
 
             <View style={styles.content}>
-                <Text style={styles.title}>
-                    {lineDetails.name}
-                </Text>
+                <View style={styles.header}>
+                    <Text style={styles.title}>
+                        {lineDetails.name}
+                    </Text>
+
+                    <FavoriteButton
+                        type="line"
+                        id={lineDetails.id}
+                    />
+                </View>
 
                 <FlatList
                     data={stops}
@@ -64,7 +72,15 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
 
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+    },
+
     title: {
+        flex: 1,
+        minWidth: 0,
         fontSize: 20,
         fontWeight: '700',
         color: '#111',

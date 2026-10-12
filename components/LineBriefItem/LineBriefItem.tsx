@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { RootStackParamList } from '@/types/rootNavigator';
 import { Line } from '@/types/lines';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 
 interface LineBriefItemProps {
     lineDetails: Line;
@@ -55,6 +56,8 @@ const LineBriefItem = ({
                     {lineDetails.name}
                 </Text>
             </View>
+
+            <FavoriteButton type='line' id={lineDetails.id} />
         </Pressable>
     );
 };
@@ -107,6 +110,7 @@ const styles = StyleSheet.create({
         flex: 1,
         minWidth: 0,
         marginLeft: 16,
+        marginRight: 8,
     },
 
     name: {
