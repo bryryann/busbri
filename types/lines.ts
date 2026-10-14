@@ -7,6 +7,7 @@ export type Stop = {
     name: string;
     coordinates: Coordinate;
     accessible: boolean;
+    thumbnail: string;
 };
 
 export interface Line {

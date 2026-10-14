@@ -3,6 +3,7 @@
         "id": "1",
         "name": "Terminal Rodoviário",
         "coordinates": [ -50.347458, -21.2925751 ],
-        "accessible": true
+        "accessible": true,
+        "thumbnail": "station-placeholder.png"
     }
 ]
