@@ -8,12 +8,14 @@ import {
     type CameraRef,
 } from '@maplibre/maplibre-react-native';
 
-import boundsData from '@/data/bounds.json';
 import { Bounds } from '@/types/bounds';
 import { MarkerGeoJSON, RouteGeoJSON } from '@/types/geojson';
-import { Line } from '@/types/lines';
+import { Line, Stop } from '@/types/lines';
+import boundsData from '@/data/bounds.json';
+import stopsData from '@/data/stops.json';
 
 const BOUNDS = boundsData as Bounds;
+const STOPS = stopsData as Stop[];
 
 interface CityMapProps {
   linesData: Line[];
@@ -43,7 +45,9 @@ const CityMap = ({
     }))
   };
 
-  const startPoint = linesData[0].stops[0];
+  const startPoint: Stop = STOPS.find(
+    stop => stop.id === linesData[0].stop_ids[0]
+  ) ?? { id: "-", name: "N/A", coordinates: [0, 0], accessible: false };
   const marcos: MarkerGeoJSON = {
     type: 'FeatureCollection',
     features: [
@@ -52,7 +56,6 @@ const CityMap = ({
         properties: {
           id: startPoint.id,
           name: startPoint.name,
-          order: startPoint.order
         },
         geometry: {
           type: 'Point',

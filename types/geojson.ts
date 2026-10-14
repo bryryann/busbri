@@ -20,7 +20,6 @@ export type RouteGeoJSON = {
 export type MarkerProperties = {
     id: string;
     name: string;
-    order: number;
 };
 
 export type MarkerGeoJSON = {

@@ -3,11 +3,13 @@ import { StyleSheet } from 'react-native';
 import { Map, Camera, type CameraRef, GeoJSONSource, Layer, } from '@maplibre/maplibre-react-native';
 
 import { Bounds } from '@/types/bounds';
-import { Line } from '@/types/lines';
+import { Line, Stop } from '@/types/lines';
 import { MarkerGeoJSON, RouteGeoJSON } from '@/types/geojson';
 import boundsData from '@/data/bounds.json';
+import stopsData from '@/data/stops.json';
 
 const BOUNDS = boundsData as Bounds;
+const STOPS = stopsData as Stop[];
 
 type RouteMapProps = {
     lineDetails: Line;
@@ -35,14 +37,14 @@ const RouteMap = ({ lineDetails }: RouteMapProps) => {
         ],
     };
 
+    const stops = STOPS.filter((stop) => lineDetails.stop_ids.includes(stop.id));
     const stopsGeoJSON: MarkerGeoJSON = {
         type: 'FeatureCollection',
-        features: lineDetails.stops.map((stop) => ({
+        features: stops.map((stop) => ({
             type: 'Feature',
             properties: {
                 id: stop.id,
                 name: stop.name,
-                order: stop.order,
             },
             geometry: {
                 type: 'Point',

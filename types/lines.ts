@@ -17,6 +17,5 @@ export interface Line {
         type: 'LineString',
         coordinates: Coordinate[],
     };
-    stops: Stop[];
     stop_ids: string[];
 };
