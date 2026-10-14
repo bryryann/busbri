@@ -5,9 +5,8 @@ type Coordinate = [number, number];
 export type Stop = {
     id: string;
     name: string;
-    order: number;
     coordinates: Coordinate;
-    routes: number[];
+    accessible: boolean;
 };
 
 export interface Line {
@@ -19,4 +18,5 @@ export interface Line {
         coordinates: Coordinate[],
     };
     stops: Stop[];
+    stop_ids: string[];
 };

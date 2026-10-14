@@ -5,10 +5,14 @@ import { Stop } from "@/types/lines";
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
 
 interface StopDetailsProps {
-    stop: Stop
+    stop: Stop,
+    servingRoutes: string[];
 };
 
-const StopDetails = ({ stop }: StopDetailsProps) => {
+const StopDetails = ({
+    stop,
+    servingRoutes
+}: StopDetailsProps) => {
     return (
         <View style={styles.stopItem}>
             <Image
@@ -34,7 +38,7 @@ const StopDetails = ({ stop }: StopDetailsProps) => {
                 </View>
 
                 <Text style={styles.stopRoutes}>
-                    {stop.routes?.join(', ') ?? ''}
+                    {servingRoutes.join(', ')}
                 </Text>
 
             </View>

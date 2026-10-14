@@ -3,10 +3,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text, View, StyleSheet, FlatList } from 'react-native';
 
 import { RootStackParamList } from '@/types/rootNavigator';
-import colors from '@/globals/colors';
 import RouteMap from '@/components/RouteMap/RouteMap';
 import StopDetails from '@/components/StopDetails';
 import FavoriteButton from '@/components/FavoriteButton/FavoriteButton';
+import STOPS from '@/data/stops.json';
+import LINES from '@/data/lines.json';
+import { Line, Stop } from '@/types/lines';
+
+const linesJson = LINES as unknown as Line[];
+const stopsJson = STOPS as Stop[];
 
 type Props = NativeStackScreenProps<
     RootStackParamList,
@@ -16,9 +21,9 @@ type Props = NativeStackScreenProps<
 const RouteDetailsScreen = ({ route }: Props) => {
     const { lineDetails } = route.params;
 
-    const stops = [...(lineDetails.stops ?? [])].sort(
-        (a, b) => a.order - b.order,
-    );
+    const stops = lineDetails.stop_ids
+        .map(id => stopsJson.find(stop => stop.id === id))
+        .filter((stop): stop is Stop => stop !== undefined);
 
     return (
         <SafeAreaView
@@ -42,9 +47,20 @@ const RouteDetailsScreen = ({ route }: Props) => {
                 <FlatList
                     data={stops}
                     keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                        <StopDetails stop={item} />
-                    )}
+                    renderItem={({ item }) => {
+                        const servingRoutes = linesJson
+                            .filter(route =>
+                                route.stop_ids.includes(item.id)
+                            )
+                            .map(item => item.id);
+
+                        return (
+                            <StopDetails 
+                                stop={item} 
+                                servingRoutes={servingRoutes}
+                            />
+                        )
+                    }}
                     contentContainerStyle={styles.listContent}
                     showsVerticalScrollIndicator={false}
                     ListEmptyComponent={
