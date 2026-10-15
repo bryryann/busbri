@@ -19,6 +19,8 @@ import {
     selectFavoriteLines,
     selectFavoriteStops,
 } from '@/features/favorites/favoritesSelectors';
+import FavoriteLineItem from '@/components/FavoriteLineItem';
+import FavoriteStopItem from '@/components/FavoriteStopItem';
 
 const HomeScreen = () => {
     const [favoriteType, setFavoriteType] = useState<FavoriteType>('line');
@@ -139,27 +141,11 @@ const HomeScreen = () => {
                             showsVerticalScrollIndicator={false}
                         >
                             {favorites.length > 0 ? (
-                                favorites.map((id) => (
-                                    <View key={id} style={styles.favoriteItem}>
-                                        <View style={styles.itemIcon}>
-                                            <Ionicons
-                                                name={favoriteType === 'line' ? 'bus-outline' : 'location-outline'}
-                                                size={20}
-                                                color={colors.primary}
-                                            />
-                                        </View>
-
-                                        <Text style={styles.itemName}>
-                                            {id}
-                                        </Text>
-
-                                        <Ionicons
-                                            name="chevron-forward"
-                                            size={18}
-                                            color="#8B91A0"
-                                        />
-                                    </View>
-                                ))
+                                favorites.map((id) => {
+                                    return favoriteType === 'line'
+                                        ? <FavoriteLineItem key={id} id={id} />
+                                        : <FavoriteStopItem key={id} id={id} />
+                                })
                             ) : (
                                 <View style={styles.emptyState}>
                                     <Ionicons
