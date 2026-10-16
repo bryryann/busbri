@@ -1,6 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
+import { RootStackParamList } from "@/types/rootNavigator";
 import colors from "@/globals/colors";
 import linesData from '@/data/lines.json';
 import { Line } from "@/types/lines";
@@ -12,22 +15,33 @@ interface FavoriteLineItemProps {
 };
 
 const FavoriteLineItem = ({ id }: FavoriteLineItemProps) => {
-    const favoriteLine = LINES.find(
+    const navigation =
+        useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+
+    const favoriteLine: Line = LINES.find(
         (line) => line.id === id
     ) ?? {
         id: "-",
         name: "N/A",
         color: "#ffffff",
-        route: { type: "LineString", coordinates: [1, 1] },
-        stop_ids: [-1],
+        route: { type: "LineString", coordinates: [[1, 1]] },
+        stop_ids: ["-1"],
+    };
+
+    const handlePress = () => {
+        navigation.navigate('RouteDetails', {
+            lineDetails: favoriteLine
+        });
     };
 
     return (
-        <View
+        <Pressable
             style={[
                 styles.favoriteItem,
                 { borderLeftColor: favoriteLine.color },
             ]}
+            onPress={handlePress}
         >
             <View
                 style={[
@@ -62,7 +76,7 @@ const FavoriteLineItem = ({ id }: FavoriteLineItemProps) => {
                 size={17}
                 color="#8B91A0"
             />
-        </View>
+        </Pressable>
     );
 };
 
