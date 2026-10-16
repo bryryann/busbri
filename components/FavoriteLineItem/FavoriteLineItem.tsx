@@ -18,7 +18,6 @@ const FavoriteLineItem = ({ id }: FavoriteLineItemProps) => {
     const navigation =
         useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-
     const favoriteLine: Line = LINES.find(
         (line) => line.id === id
     ) ?? {
@@ -67,7 +66,7 @@ const FavoriteLineItem = ({ id }: FavoriteLineItemProps) => {
                 </Text>
 
                 <Text style={styles.itemId}>
-                    Line {id}
+                    Linha {id}
                 </Text>
             </View>
 
