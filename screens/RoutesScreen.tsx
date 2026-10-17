@@ -6,7 +6,8 @@ import {
     TextInput, 
     SectionList,
     FlatList, 
-    StyleSheet 
+    StyleSheet,
+    StatusBar
 } from 'react-native';
 
 import lines from '@/data/lines.json';
@@ -84,6 +85,11 @@ const RoutesScreen = () => {
             edges={['top']}
             style={styles.container}
         >
+            <StatusBar
+                backgroundColor={colors.primary}
+                barStyle='light-content'
+            />
+            
             <View style={styles.header}>
                 <View style={styles.searchContainer}>
                     <Ionicons
