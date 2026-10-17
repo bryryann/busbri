@@ -137,19 +137,30 @@ const HomeScreen = () => {
 
                         <ScrollView
                             style={styles.trayScroll}
-                            contentContainerStyle={styles.trayContent}
+                            contentContainerStyle={[
+                                styles.trayContent,
+                                favoriteType === 'stop' && styles.stopsGrid,
+                            ]}
                             showsVerticalScrollIndicator={false}
                         >
                             {favorites.length > 0 ? (
-                                favorites.map((id) => {
-                                    return favoriteType === 'line'
-                                        ? <FavoriteLineItem key={id} id={id} />
-                                        : <FavoriteStopItem key={id} id={id} />
-                                })
+                                favoriteType === 'line' ? (
+                                    favorites.map((id) => (
+                                        <FavoriteLineItem key={id} id={id} />
+                                    ))
+                                ) : (
+                                    favorites.map((id) => (
+                                        <FavoriteStopItem key={id} id={id} />
+                                    ))
+                                )
                             ) : (
                                 <View style={styles.emptyState}>
                                     <Ionicons
-                                        name={favoriteType === 'line' ? 'bus-outline' : 'location-outline'}
+                                        name={
+                                            favoriteType === 'line'
+                                                ? 'bus-outline'
+                                                : 'location-outline'
+                                        }
                                         size={32}
                                         color={colors.primary}
                                     />
@@ -355,6 +366,15 @@ const styles = StyleSheet.create({
 
     trayContent: {
         flexGrow: 1,
+    },
+
+    stopsGrid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        gap: 10,
+        padding: 4,
     },
 
     emptyState: {

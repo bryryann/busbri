@@ -1,32 +1,38 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import colors from "@/globals/colors";
+import stopsData from '@/data/stops.json';
+import { Stop } from "@/types/lines";
+
+const STOPS = stopsData as Stop[];
 
 interface FavoriteStopItemProps  {
     id: string;
 };
 
 const FavoriteStopItem = ({ id }: FavoriteStopItemProps) => {
+    const favoriteStop: Stop = STOPS.find(
+        (stop) => stop.id === id
+    ) ?? {
+        id: "-",
+        name: "N/A",
+        coordinates: [-1, 1],
+        accessible: false,
+        thumbnail: "-",
+    };
+    
     return (
-        <View style={styles.favoriteItem}>
-            <View style={styles.itemIcon}>
-                <Ionicons
-                    name='location-outline'
-                    size={20}
-                    color={colors.primary}
-                />
-            </View>
-
-            <Text style={styles.itemName}>
-                {id}
-            </Text>
-
-            <Ionicons
-                name='chevron-forward'
-                size={18}
-                color='#8b91a0'
+        <View style={styles.favoriteStopCard}>
+            <Image
+                source={require('@/assets/images/station-placeholder.png')}
+                style={styles.stopImage}
+                resizeMode="cover"
             />
+
+            <Text style={styles.stopName} numberOfLines={2}>
+                {favoriteStop.name}
+            </Text>
         </View>
     );
 }; 
@@ -34,30 +40,29 @@ const FavoriteStopItem = ({ id }: FavoriteStopItemProps) => {
 export default FavoriteStopItem;
 
 const styles = StyleSheet.create({
-    favoriteItem: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingVertical: 11,
-        paddingHorizontal: 9,
+    favoriteStopCard: {
+        width: 110,
+        minHeight: 140,
         backgroundColor: '#FFFFFF',
-        borderRadius: 12,
-        marginTop: 5,
-    },
-
-    itemIcon: {
-        width: 34,
-        height: 34,
         borderRadius: 10,
-        backgroundColor: '#E8EFFD',
-        alignItems: 'center',
-        justifyContent: 'center',
+        overflow: 'hidden',
+        alignItems: 'stretch',
+        borderWidth: 1,
+        borderColor: '#E8EAF0',
     },
 
-    itemName: {
-        flex: 1,
-        color: colors.primary,
-        fontSize: 13,
+    stopImage: {
+        width: '100%',
+        height: 90,
+        backgroundColor: '#E5E7EB',
+    },
+
+    stopName: {
+        fontSize: 11,
         fontWeight: '600',
-        marginLeft: 10,
+        color: colors.text,
+        textAlign: 'center',
+        paddingHorizontal: 5,
+        marginTop: 6,
     },
 });
