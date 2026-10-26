@@ -22,17 +22,29 @@ import {
 import FavoriteLineItem from '@/components/FavoriteLineItem';
 import FavoriteStopItem from '@/components/FavoriteStopItem';
 
+/**
+ * EN: Home screen displaying the user's favorite bus lines and stops.
+ * PT: Tela inicial que exibe as linhas e os pontos favoritos do usuário.
+ */
 const HomeScreen = () => {
+    // EN: Tracks which type of favorite is currently selected.
+    // PT: Controla qual tipo de favorito está selecionado no momento.
     const [favoriteType, setFavoriteType] = useState<FavoriteType>('line');
 
+    // EN: Retrieves favorite line IDs from the Redux store.
+    // PT: Obtém os IDs das linhas favoritas da store do Redux.
     const favoriteLines = useAppSelector((state: RootState) => 
         selectFavoriteLines(state)
     );
 
+    // EN: Retrieves favorite stop IDs from the Redux store.
+    // PT: Obtém os IDs dos pontos favoritos da store do Redux.
     const favoriteStops = useAppSelector((state: RootState) => 
         selectFavoriteStops(state)
     );
 
+    // EN: Selects the list to display based on the active tab.
+    // PT: Seleciona a lista a ser exibida conforme a aba ativa.
     const favorites = 
         favoriteType === 'line'
             ? favoriteLines
@@ -40,6 +52,8 @@ const HomeScreen = () => {
 
     return (
         <SafeAreaView
+            // EN: Applies the safe area only to the top of the screen.
+            // PT: Aplica a área segura somente à parte superior da tela.
             edges={['top']}
             style={{ 
                 flex: 1,
@@ -52,7 +66,8 @@ const HomeScreen = () => {
             />
 
             <View style={styles.screen}>
-                {/* header */}
+                {/* EN: Displays the user's profile and welcome message.
+                    PT: Exibe o perfil do usuário e a mensagem de boas-vindas. */}
                 <View style={styles.header}>
                     <View style={styles.profile}>
                         <Image
@@ -72,7 +87,8 @@ const HomeScreen = () => {
                     </View>
                 </View>
 
-                {/* RENDER FAVORITES */}
+                {/* EN: Displays the favorites section and its contents.
+                    PT: Exibe a seção de favoritos e seu conteúdo. */}
                 <View style={styles.content} >
                     <View style={styles.sectionHeading}>
                         <Ionicons name='star' size={20}/>
@@ -88,13 +104,16 @@ const HomeScreen = () => {
                                 Seus favoritos
                             </Text>
 
+                            {/* EN: Shows the number of items in the selected list.
+                                PT: Exibe a quantidade de itens da lista selecionada. */}
                             <Text style={styles.favoriteCount}>
                                 {favorites.length}
                             </Text>
                         </View>
 
                         <View style={styles.tabs}>
-                            {/* favorite lines */}
+                            {/* EN: Switches to the favorite lines tab.
+                                PT: Seleciona a aba de linhas favoritas. */}
                             <Pressable
                                 onPress={() => setFavoriteType('line')}
                                 style={[
@@ -114,7 +133,8 @@ const HomeScreen = () => {
                                 </Text>
                             </Pressable>
 
-                            {/* favorite stops */}
+                            {/* EN: Switches to the favorite stops tab.
+                                PT: Seleciona a aba de pontos favoritos. */}
                             <Pressable
                                 onPress={() => setFavoriteType('stop')}
                                 style={[
@@ -135,6 +155,8 @@ const HomeScreen = () => {
                             </Pressable>
                         </View>
 
+                        {/* EN: Allows the favorites list to scroll when needed.
+                            PT: Permite rolar a lista de favoritos quando necessário. */}
                         <ScrollView
                             style={styles.trayScroll}
                             contentContainerStyle={[
@@ -143,6 +165,8 @@ const HomeScreen = () => {
                             ]}
                             showsVerticalScrollIndicator={false}
                         >
+                            {/* EN: Renders the selected favorites or an empty-state message.
+                                PT: Exibe os favoritos selecionados ou uma mensagem de lista vazia. */}
                             {favorites.length > 0 ? (
                                 favoriteType === 'line' ? (
                                     favorites.map((id) => (
@@ -154,6 +178,8 @@ const HomeScreen = () => {
                                     ))
                                 )
                             ) : (
+                                // EN: Shows a message when there are no favorites of the selected type.
+                                // PT: Exibe uma mensagem quando não há favoritos do tipo selecionado.
                                 <View style={styles.emptyState}>
                                     <Ionicons
                                         name={

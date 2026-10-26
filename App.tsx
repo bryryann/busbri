@@ -80,6 +80,7 @@ export default function App() {
 };
 
 const styles = StyleSheet.create({
+  /** EN: Splash screen layout. PT-BR: Layout da tela de splash. */
   splash: {
     flex: 1,
     backgroundColor: colors.primary,
