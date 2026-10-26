@@ -12,6 +12,10 @@ import { store, persistor } from '@/app/store';
 import RootNavigator from '@/navigation/RootNavigator';
 import colors from './globals/colors';
 
+/**
+ * EN: App root component.
+ * PT: Componente raíz do aplicativo
+ */
 export default function App() {
   const [showSplash, setShowSplash] = useState<boolean>(true);
 
@@ -30,11 +34,35 @@ export default function App() {
   );
 
   return (
+    // EN: Provides the Redux store to the entire application.
+    // PT: Disponibiliza a store do Redux para toda a aplicação.
     <Provider store={store}>
+
+      {/*
+        EN: Delays rendering until the persisted Redux state is rehydrated.
+        PT: Adia a renderização até que o estado persistido do Redux seja restaurado. */}
       <PersistGate loading={splash} persistor={persistor} >
+
+        {/*
+          EN: Enable gestures handling across the application.
+          PT: Habilita o gerenciamento de gestos em toda a aplicação. */}
         <GestureHandlerRootView style={{ flex: 1 }}>
+
+          {/*
+            EN: Provides safe area insets for screen and UI elements.
+            PT: Disponibiliza as áreas seguras para telas e elementos da interface. */}
           <SafeAreaProvider>
+
+            {/*
+              EN: Makes the bottom sheet modal funcionality availabe throughout the component tree.
+              PT: Disponibiliza a funcionalidade de modais 'bottom sheet' para todos os componentes. */}
             <BottomSheetModalProvider>
+              
+              {/*
+                EN: Displays the splash screen while the app is initializing. Once initialization is complete, renders
+                    the navigation container and the root navigator.
+                PT: Exibe a tela de splash enquanto o aplicativo é inicializado. Após a inicialização, renderiza o
+                    conteiner de navegação e o navegador principal. */}
               {showSplash ? (
                 splash
               ) : (
@@ -42,6 +70,7 @@ export default function App() {
                   <RootNavigator />
                 </NavigationContainer>
               )}
+
             </BottomSheetModalProvider>
           </SafeAreaProvider>
         </GestureHandlerRootView>
