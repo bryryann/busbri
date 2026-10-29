@@ -8,16 +8,24 @@ import colors from "@/globals/colors";
 import linesData from '@/data/lines.json';
 import { Line } from "@/types/lines";
 
+// EN: Converts the imported JSON data into an array of bus lines.
+// PT: Converte os dados JSON importados em um array de linhas de ônibus.
 const LINES = linesData as Line[];
 
 interface FavoriteLineItemProps {
+    // EN: ID of the favorite bus line to be displayed.
+    // PT: ID da linha de ônibus favorita que será exibida.
     id: string;
 };
 
+// EN: Component that displays a favorite bus line and allows navigation to its details.
+// PT: Componente que exibe uma linha de ônibus favorita e permite navegar para seus detalhes.
 const FavoriteLineItem = ({ id }: FavoriteLineItemProps) => {
     const navigation =
         useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+    // EN: Finds the bus line matching the provided ID.
+    // PT: Busca a linha de ônibus correspondente ao ID informado.
     const favoriteLine: Line = LINES.find(
         (line) => line.id === id
     ) ?? {
@@ -28,6 +36,8 @@ const FavoriteLineItem = ({ id }: FavoriteLineItemProps) => {
         stop_ids: ["-1"],
     };
 
+    // EN: Navigates to the route details screen with the selected line's data.
+    // PT: Navega para a tela de detalhes da rota com os dados da linha selecionada.
     const handlePress = () => {
         navigation.navigate('RouteDetails', {
             lineDetails: favoriteLine

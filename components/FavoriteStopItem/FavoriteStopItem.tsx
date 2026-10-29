@@ -1,17 +1,24 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 
 import colors from "@/globals/colors";
 import stopsData from '@/data/stops.json';
 import { Stop } from "@/types/lines";
 
+// EN: Converts the imported JSON data into an array of bus stops.
+// PT: Converte os dados JSON importados em um array de pontos de ônibus.
 const STOPS = stopsData as Stop[];
 
 interface FavoriteStopItemProps  {
+    // EN: ID of the favorite bus stop to be displayed.
+    // PT: ID do ponto de ônibus favorito que será exibido.
     id: string;
 };
 
+// EN: Component that displays a favorite bus stop with its image and name.
+// PT: Componente que exibe um ponto de ônibus favorito com sua imagem e seu nome.
 const FavoriteStopItem = ({ id }: FavoriteStopItemProps) => {
+    // EN: Finds the bus stop matching the provided ID. Provides fallback data when request stop is not found.
+    // PT: Busca o ponto de ônibus correspondente ao ID informado. Fornece dados padrão quando ponto não é encontrado.
     const favoriteStop: Stop = STOPS.find(
         (stop) => stop.id === id
     ) ?? {

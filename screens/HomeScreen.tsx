@@ -66,8 +66,6 @@ const HomeScreen = () => {
             />
 
             <View style={styles.screen}>
-                {/* EN: Displays the user's profile and welcome message.
-                    PT: Exibe o perfil do usuário e a mensagem de boas-vindas. */}
                 <View style={styles.header}>
                     <View style={styles.profile}>
                         <Image
